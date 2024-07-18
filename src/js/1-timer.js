@@ -1,7 +1,52 @@
-// Описаний в документації
+//add libraries
 import flatpickr from 'flatpickr';
-// Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
+
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
+let userSelectedDate;
+let dateDiff;
+
+const inputDateField = document.querySelector('input#datetime-picker');
+const startButton = document.querySelector('.data-start-btn');
+
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+
+  onClose(selectedDates) {
+    userSelectedDate = selectedDates[0];
+    let currentDate = new Date();
+
+    if (userSelectedDate.getTime() - currentDate.getTime() > 0) {
+      buttonEnabled();
+    } else {
+      iziToast.error({
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+        backgroundColor: '#B51B1B',
+        messageColor: '#fff',
+      });
+      buttonDisabled();
+    }
+  },
+};
+
+let timer = flatpickr(inputDateField, options);
+
+function buttonDisabled() {
+  startButton.disabled = true;
+  inputDateField.classList.add('input-disabled');
+  return;
+}
+
+function buttonEnabled() {
+  inputDateField.classList.remove('input-disabled');
+  startButton.disabled = false;
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -22,74 +67,45 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-let userSelectedDate;
-const inputDateField = document.querySelector('input#datetime-picker');
-// console.dir(inputDateField);
-const startButton = document.querySelector('.data-start-btn');
-// console.dir(startButton);
-
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    userSelectedDate = selectedDates[0];
-    handleSelectedDate(userSelectedDate);
-  },
-};
-let timer = flatpickr(inputDateField, options);
-
-function handleSelectedDate(userSelectedDate) {
-  console.log(`This is : ${userSelectedDate}`);
-  // Get current date and time
-  let currentDate = new Date();
-  console.log(`Current date: ${currentDate}`);
-  // Calculate the difference in milliseconds
-  const timeDifference = userSelectedDate.getTime() - currentDate.getTime();
-  console.log(timeDifference);
-  if (timeDifference > 0) {
-    inputDateField.classList.remove('input-disabled');
-    updateTimer(timeDifference);
-  } else {
-    window.alert('Please choose a date in the future');
-    startButton.disabled = true;
-    inputDateField.classList.add('input-disabled');
-    return; // Exit the function if the date is older
-  }
+function addLeadingZero(value) {
+  return value.toString().padStart(2, '0');
 }
 
-function updateTimer(timeDifference) {
-  console.log('update Timer');
-  console.log(timeDifference);
+function updateTimer(days, hours, minutes, seconds) {
   const timerDaysField = document.querySelector('.value[data-days]');
-  console.dir(timerDaysField);
   const timerHoursField = document.querySelector('.value[data-hours]');
   const timerMinutesField = document.querySelector('.value[data-minutes]');
   const timerSecondsField = document.querySelector('.value[data-seconds]');
 
-  let timerObject = convertMs(timeDifference);
-  console.log(timerObject);
-
-  function addLeadingZero(value) {
-    return value.padStart(2, '0');
-  }
-
-  timerDaysField.textContent = addLeadingZero(`${timerObject.days}`);
-  timerHoursField.textContent = addLeadingZero(`${timerObject.hours}`);
-  timerMinutesField.textContent = addLeadingZero(`${timerObject.minutes}`);
-  timerSecondsField.textContent = addLeadingZero(`${timerObject.seconds}`);
-
-  // Call this function again after 1 second to update the time
-  setTimeout(updateTimer, 1000);
+  timerDaysField.textContent = days;
+  timerHoursField.textContent = addLeadingZero(hours);
+  timerMinutesField.textContent = addLeadingZero(minutes);
+  timerSecondsField.textContent = addLeadingZero(seconds);
 }
 
-startButton.addEventListener('click', handleStart);
+function startTimer() {
+  buttonDisabled();
+  inputDateField.disabled = true;
 
-function handleStart() {
-  if (userSelectedDate && userSelectedDate.getTime() > new Date().getTime()) {
-    setTimeout(updateTimer, 1000);
-  } else {
-    console.warn('No valid selected date available for timer update');
-  }
+  intervalTimer = setInterval(() => {
+    const now = new Date();
+
+    dateDiff = userSelectedDate.getTime() - now.getTime();
+
+    if (dateDiff <= 0) {
+      clearInterval(intervalTimer);
+      inputDateField.disabled = false;
+      iziToast.success({
+        title: 'OK',
+        message: 'Time is up!',
+        position: 'topRight',
+      });
+    } else {
+      const { days, hours, minutes, seconds } = convertMs(dateDiff);
+      console.log({ days, hours, minutes, seconds });
+      updateTimer(days, hours, minutes, seconds);
+    }
+  }, 1000);
 }
+
+startButton.addEventListener('click', startTimer);
