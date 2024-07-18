@@ -9,7 +9,7 @@
 @import url('./2-snackbar.css');
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -22,4 +22,26 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+.page-link,
+.return-link {
+  text-align: center;
+  display: block;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100px;
+  background: #4e75ff;
+  margin: 25px;
+  color: #fff;
+
+  transition: background-color 250ms ease-in-out;
+}
+
+.page-link:hover {
+  background-color: #6c8cff;
+}
+
+.return-link:hover {
+  background-color: #6c8cff;
 }
