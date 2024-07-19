@@ -10,6 +10,7 @@ let dateDiff;
 
 const inputDateField = document.querySelector('input#datetime-picker');
 const startButton = document.querySelector('.data-start-btn');
+buttonDisabled();
 
 const options = {
   enableTime: true,
@@ -29,6 +30,7 @@ const options = {
         position: 'topRight',
         backgroundColor: '#B51B1B',
         messageColor: '#fff',
+        // iconColor: '#fff',
       });
       buttonDisabled();
     }
@@ -77,7 +79,7 @@ function updateTimer(days, hours, minutes, seconds) {
   const timerMinutesField = document.querySelector('.value[data-minutes]');
   const timerSecondsField = document.querySelector('.value[data-seconds]');
 
-  timerDaysField.textContent = days;
+  timerDaysField.textContent = addLeadingZero(days);
   timerHoursField.textContent = addLeadingZero(hours);
   timerMinutesField.textContent = addLeadingZero(minutes);
   timerSecondsField.textContent = addLeadingZero(seconds);
@@ -87,13 +89,14 @@ function startTimer() {
   buttonDisabled();
   inputDateField.disabled = true;
 
-  intervalTimer = setInterval(() => {
+  let intervalTimer = setInterval(() => {
     const now = new Date();
 
     dateDiff = userSelectedDate.getTime() - now.getTime();
 
     if (dateDiff <= 0) {
       clearInterval(intervalTimer);
+      console.log('Time is up');
       inputDateField.disabled = false;
       iziToast.success({
         title: 'OK',
@@ -106,6 +109,9 @@ function startTimer() {
       updateTimer(days, hours, minutes, seconds);
     }
   }, 1000);
+  //   if (!inputDateField.disabled) {
+
+  //   }
 }
 
 startButton.addEventListener('click', startTimer);

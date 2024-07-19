@@ -5,11 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snackbar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <section>
-      <a href="./index.html">Go to home</a>
+      <a class="return-link" href="./index.html">Go to home</a>
     </section>
+    <form class="form">
+      <label class="number-lable">
+        Delay (ms)
+
+        <svg class="number-up" width="16" height="16">
+          <use href="./img/icons.svg#icon-caret-up-fill"></use>
+        </svg>
+
+        <svg class="number-down" width="16" height="16">
+          <use href="./img/icons.svg#icon-caret-down-fill"></use>
+        </svg>
+
+        <input type="number" name="delay" required class="number-input" />
+      </label>
+
+      <fieldset class="fieldset">
+        <legend>State</legend>
+        <label class="fieldset-lable">
+          <input
+            type="radio"
+            name="state"
+            value="fulfilled"
+            class="fieldset-input"
+            required
+          />
+          Fulfilled
+        </label>
+        <label class="fieldset-lable">
+          <input
+            type="radio"
+            name="state"
+            value="rejected"
+            class="fieldset-input"
+            required
+          />
+          Rejected
+        </label>
+      </fieldset>
+
+      <button type="submit" class="submit-btn">Create notification</button>
+    </form>
+
     <script type="module" src="./js/2-snackbar.js"></script>
   </body>
 </html>
