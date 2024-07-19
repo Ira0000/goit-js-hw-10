@@ -5,15 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snackbar</title>
-    <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers2.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-3cfb730f.js">
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-77e16229.js">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap"
+      rel="stylesheet"
+    />
+    
+    <script type="module" crossorigin src="/goit-js-hw-10/assets/modulepreload-polyfill-3cfb730f.js"></script>
+    <script type="module" crossorigin src="/goit-js-hw-10/assets/vendor-77e16229.js"></script>
     <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-7a007824.css">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/styles-14554801.css">
   </head>
   <body>
     <section>
-      <a href="./index.html">Go to home</a>
+      <a class="return-link" href="./index.html">Go to home</a>
     </section>
+    <form class="form">
+      <label class="number-lable">
+        Delay (ms)
+
+        <svg class="number-up" width="16" height="16">
+          <use href="/goit-js-hw-10/assets/icons-fd4d2161.svg#icon-caret-up-fill"></use>
+        </svg>
+
+        <svg class="number-down" width="16" height="16">
+          <use href="/goit-js-hw-10/assets/icons-fd4d2161.svg#icon-caret-down-fill"></use>
+        </svg>
+
+        <input type="number" name="delay" required class="number-input" />
+      </label>
+
+      <fieldset class="fieldset">
+        <legend>State</legend>
+        <label class="fieldset-lable">
+          <input
+            type="radio"
+            name="state"
+            value="fulfilled"
+            class="fieldset-input"
+            required
+          />
+          Fulfilled
+        </label>
+        <label class="fieldset-lable">
+          <input
+            type="radio"
+            name="state"
+            value="rejected"
+            class="fieldset-input"
+            required
+          />
+          Rejected
+        </label>
+      </fieldset>
+
+      <button type="submit" class="submit-btn">Create notification</button>
+    </form>
+
     
   </body>
 </html>
