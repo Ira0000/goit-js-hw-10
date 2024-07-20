@@ -1,20 +1,59 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-// const upButton = document.querySelector('.up-btn');
-// const downButton = document.querySelector('.down-btn');
-// const inputFormField = document.querySelector('.number-input');
-// let value = inputFormField.value;
+const inputFormField = document.querySelector('.number-input');
+const fieldsetInputFullfilled = document.querySelector(
+  'input[name="state"][value="fulfilled"]'
+);
+const fieldsetInputRejected = document.querySelector(
+  'input[name="state"][value="rejected"]'
+);
+const createButton = document.querySelector('.submit-btn');
 
-// function numberUp() {
-//   console.log(value);
-//   //   if (value === '') {
-//   //     value = 0;
-//   //   }
-//   newValue = value + 1;
-//   inputFormField.value = newValue;
-// }
+createButton.addEventListener('click', handleClick);
 
-// function numberDown() {}
+function handleClick(event) {
+  event.preventDefault();
 
-// upButton.addEventListener('click', numberUp);
+  let value = inputFormField.value;
+  const isSuccess = fieldsetInputFullfilled.checked;
+  const isFailed = fieldsetInputRejected.checked;
+
+  if (value > 0 && (isSuccess === true || isFailed === true)) {
+    let delay = value;
+
+    // Create promise
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (isSuccess) {
+          resolve(`✅ Fulfilled promise in ${delay}ms`);
+        } else {
+          reject(`❌ Rejected promise in ${delay}ms`);
+        }
+      }, delay);
+    });
+
+    // Registering promise callbacks
+    promise
+      .then(value => {
+        iziToast.success({
+          icon: '',
+          message: value,
+          position: 'topRight',
+        });
+      })
+      .catch(error => {
+        iziToast.error({
+          icon: '',
+          message: error,
+          position: 'topRight',
+        });
+      });
+  } else {
+    iziToast.warning({
+      title: 'Caution',
+      message: 'You forgot to fill all the fields',
+      position: 'topRight',
+    });
+  }
+}
