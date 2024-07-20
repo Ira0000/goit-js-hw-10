@@ -5,7 +5,8 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-import pathSprite from '../img/icons.svg';
+// import pathSprite from '../img/icons.svg';
+import pathSprite from '/Users/admin/Desktop/Coding/my-project/goit-js-hw-10/src/img/icons.svg';
 
 let userSelectedDate;
 let dateDiff;
