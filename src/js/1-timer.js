@@ -5,6 +5,8 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+import pathSprite from '../img/icons.svg';
+
 let userSelectedDate;
 let dateDiff;
 
@@ -30,7 +32,9 @@ const options = {
         position: 'topRight',
         backgroundColor: '#B51B1B',
         messageColor: '#fff',
-        // iconColor: '#fff',
+        iconColor: '#fff',
+        icon: '',
+        iconUrl: '${pathSprite}#icon-close-octagon',
       });
       buttonDisabled();
     }
