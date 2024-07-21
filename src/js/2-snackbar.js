@@ -26,9 +26,9 @@ function handleClick(event) {
     const promise = new Promise((resolve, reject) => {
       setTimeout(() => {
         if (isSuccess) {
-          resolve(`✅ Fulfilled promise in ${delay}ms`);
+          resolve(`Fulfilled promise in ${delay}ms`);
         } else {
-          reject(`❌ Rejected promise in ${delay}ms`);
+          reject(`Rejected promise in ${delay}ms`);
         }
       }, delay);
     });
@@ -40,6 +40,12 @@ function handleClick(event) {
           icon: '',
           message: value,
           position: 'topRight',
+          backgroundColor: '#59A10D',
+          messageColor: '#fff',
+          iconColor: '#fff',
+          icon: '',
+          iconUrl: '../img/bi_check2-circle.png',
+          progressBarColor: '#326101',
         });
       })
       .catch(error => {
@@ -47,13 +53,24 @@ function handleClick(event) {
           icon: '',
           message: error,
           position: 'topRight',
+          backgroundColor: '#EF4040',
+          messageColor: '#fff',
+          iconColor: '#fff',
+          icon: '',
+          iconUrl: '../img/bi_x-octagon.png',
+          progressBarColor: '#B51B1B',
         });
       });
   } else {
     iziToast.warning({
-      title: 'Caution',
       message: 'You forgot to fill all the fields',
       position: 'topRight',
+      backgroundColor: '#FFA000',
+      messageColor: '#fff',
+      iconColor: '#fff',
+      icon: '',
+      iconUrl: '../img/bi_exclamation-triangle.png',
+      progressBarColor: '#BB7B10',
     });
   }
 }

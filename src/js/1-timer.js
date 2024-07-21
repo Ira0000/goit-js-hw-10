@@ -30,11 +30,13 @@ const options = {
       iziToast.error({
         message: 'Please choose a date in the future',
         position: 'topRight',
-        backgroundColor: '#B51B1B',
+        backgroundColor: '#EF4040',
         messageColor: '#fff',
         iconColor: '#fff',
         icon: '',
-        iconUrl: '${pathSprite}#icon-close-octagon',
+        iconUrl: '../img/bi_x-octagon.png',
+        progressBarColor: '#B51B1B',
+        // iconUrl: '${pathSprite}#icon-close-octagon',
       });
       buttonDisabled();
     }
@@ -104,8 +106,15 @@ function startTimer() {
       inputDateField.disabled = false;
       iziToast.success({
         title: 'OK',
+        titleColor: '#fff',
         message: 'Time is up!',
         position: 'topRight',
+        backgroundColor: '#59A10D',
+        messageColor: '#fff',
+        iconColor: '#fff',
+        icon: '',
+        iconUrl: '../img/bi_check2-circle.png',
+        progressBarColor: '#326101',
       });
     } else {
       const { days, hours, minutes, seconds } = convertMs(dateDiff);
