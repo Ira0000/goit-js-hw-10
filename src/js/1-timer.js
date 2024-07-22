@@ -34,9 +34,9 @@ const options = {
         messageColor: '#fff',
         iconColor: '#fff',
         icon: '',
-        // iconUrl: '../img/bi_x-octagon.png',
+        iconUrl: '../img/bi_x-octagon.png',
         progressBarColor: '#B51B1B',
-        iconUrl: '${pathSprite}#icon-close-octagon',
+        // iconUrl: '${pathSprite}#icon-close-octagon',
       });
       buttonDisabled();
     }
