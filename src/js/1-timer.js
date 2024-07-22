@@ -33,10 +33,11 @@ const options = {
         backgroundColor: '#EF4040',
         messageColor: '#fff',
         iconColor: '#fff',
-        icon: '',
-        iconUrl: '../img/bi_x-octagon.png',
+        icon: 'fa-regular fa-circle-xmark',
         progressBarColor: '#B51B1B',
         // iconUrl: '${pathSprite}#icon-close-octagon',
+        // iconUrl: '../img/bi_x-octagon.png',
+        // iconUrl: ,
       });
       buttonDisabled();
     }

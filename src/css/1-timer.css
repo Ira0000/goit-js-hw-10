@@ -85,9 +85,6 @@
   text-transform: uppercase;
 }
 
-.error-svg {
-  width: 24px;
-  height: 24px;
-  color: #fff;
-  display: block;
+.fa-circle-xmark {
+  fill: #fff;
 }
